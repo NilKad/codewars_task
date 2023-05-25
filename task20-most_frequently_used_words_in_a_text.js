@@ -1,8 +1,30 @@
 function topThreeWords(text) {
   const countWords = new Map();
   const words = text.trim().split(/[^a-zA-Z']+/);
-  console.log(words);
-  words.array.forEach((el) => {});
+  // console.log(words);
+  words.forEach((el) => {
+    const newEl = el.toLowerCase();
+    if (countWords.has(newEl)) {
+      countWords.set(newEl, countWords.get(newEl) + 1);
+    } else {
+      el !== "" && countWords.set(newEl, 1);
+    }
+  });
+  console.log(countWords);
+  const values = Array.from(countWords.values()).sort((a, b) => b - a);
+  // const values = Object.values(countWords);
+  // values = values;
+  const res = [];
+  console.log(values);
+  for (let i = 0; i < 3 && i < values.length; i++) {
+    countWords.forEach((value, key) => {
+      // console.log("key: ", key, "\tvalue: ", value);
+      if (value === values[i]) {
+        res.push(key);
+      }
+    });
+  }
+  console.log("res: ", res);
 }
 
 console.log(topThreeWords("a a a  b  c c  d d d d  e e e e e"), ["e", "d", "a"]);
@@ -15,7 +37,7 @@ console.log(topThreeWords("e e e e DDD ddd DdD: ddd ddd aa aA Aa, bb cc cC e e e
   "aa",
 ]);
 
-console.log(topThreeWords("  //wont won't won't "), ["won't", "wont"]);
+console.log(topThreeWords("  ///wont won't won't "), ["won't", "wont"]);
 
 // console.log(topThreeWords("  , e   .. "), ["e"]);
 
