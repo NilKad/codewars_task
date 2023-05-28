@@ -4,33 +4,12 @@ function topThreeWords(text) {
   words.forEach((el) => {
     const newEl = el.toLowerCase();
     countWords.set(newEl, countWords.has(newEl) ? countWords.get(newEl) + 1 : 1);
-    // if (countWords.has(newEl)) {
-    //   countWords.set(newEl, countWords.get(newEl) + 1);
-    // } else {
-    //   el !== "" && el !== "'" && countWords.set(newEl, 1);
-    // }
   });
   countWords.delete("'");
   countWords.delete("");
 
-  // console.log(
-  //   "countWords: ",
-  //   [...countWords]
-  //     .sort((a, b) => b[1] - a[1])
-  //     .slice(0, 3)
-  //     .map((a) => a[0])
-  // );
   const values = Array.from(countWords.values()).sort((a, b) => b - a);
   const res = [];
-  // for (let i = 0; i < 3 && i < values.length; i++) {
-  //   for (const item of countWords) {
-  //     if (item[1] === values[i] && !res.includes(item[0])) {
-  //       res.push(item[0]);
-  //       break;
-  //     }
-  //   }
-  // }
-  // return res;
   return [...countWords]
     .sort((a, b) => b[1] - a[1])
     .slice(0, 3)
